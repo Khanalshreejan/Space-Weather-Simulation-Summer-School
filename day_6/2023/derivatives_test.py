@@ -111,7 +111,7 @@ if __name__ == "__main__":
     ax3 = fig.add_subplot(313)
     
     # define dx:
-    dx = np.pi / 8
+    dx = np.pi / 4
     
     # arange doesn't include last point, so add explicitely:
     x = np.arange(-2.0 * np.pi, 2.0 * np.pi + dx, dx)
@@ -130,8 +130,11 @@ if __name__ == "__main__":
     ax1.plot(x, f)
 
     # plot first derivatives:
+    error = np.sum(np.abs(n_dfdx - a_dfdx)) / len(n_dfdx)
+    sError = ' (Err: %5.1f)' % error
     ax2.plot(x, a_dfdx, color = 'black', label = 'Analytic')
-    ax2.plot(x, n_dfdx, color = 'red', label = 'Numeric')
+    ax2.plot(x, n_dfdx, color = 'red', label = 'Numeric'+ sError)
+    ax2.scatter(x, n_dfdx, color = 'red')
     ax2.legend()
 
     # plot second derivatives:
