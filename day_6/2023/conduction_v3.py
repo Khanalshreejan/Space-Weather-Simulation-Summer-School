@@ -47,14 +47,14 @@ if __name__ == "__main__":
     for ut in range(0,24,1):
 
         # UT-dependent heating function:
-        heat = 5.0 * np.sin(ut * np.pi / 24.0)
+        heat = 50.0 * np.sin(ut * np.pi / 24.0)
         # at night, there is still chemistry, which adds heat:
-        if (heat < 1.0):
-            heat = 1.0
+        if (heat < 25.0):
+            heat = 25.0
 
         # add sources:
         l = ((x > 1.0) & (x < 7.5))
-        d[l] = -heat * (10.0 - x[l])/10.0
+        d[l] = -heat * (10.0 - x[l])/10.0 * (dx ** 2)
     
         # solve for Temperature:
         t = solve_tridiagonal(a, b, c, d)
